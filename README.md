@@ -50,19 +50,19 @@ Let $q$ be the trajectory distribution of curated good samples,
 $p_{\mathrm{ref}}$ the frozen pretrained model, and $p_\theta$ the trainable
 model. We define the KL-divergence gap as
 
-$$
+```math
 \Delta(p_{\mathrm{ref}}, p_\theta)
 = D_{\mathrm{KL}}(q \| p_{\mathrm{ref}})
 - D_{\mathrm{KL}}(q \| p_\theta).
-$$
+```
 
 A positive gap means that the trainable model is closer to the preference
 distribution than the reference model. IPA encourages this through
 
-$$
+```math
 \mathcal{L}_{\mathrm{IPA}}
-= -\log \sigma\!\left(\beta\,\Delta(p_{\mathrm{ref}},p_\theta)\right),
-$$
+= -\log \sigma\left(\beta\,\Delta(p_{\mathrm{ref}},p_\theta)\right),
+```
 
 where $\beta$ controls how strongly the aligned model is constrained by the
 pretrained prior. The paper shows that maximizing this gap is equivalent, up to
@@ -70,17 +70,14 @@ a constant, to maximizing an implicit reward.
 
 ### Flow IPA
 
-For flow matching, let $\mathbf{Z}_t=t\mathbf{Z}_1+(1-t)\mathbf{Z}_0$ and
-$v=\mathbf{Z}_1-\mathbf{Z}_0$. The frozen and trainable velocity fields are
-$v_{\mathrm{ref}}$ and $v_\theta$, respectively. Flow IPA
-preference objective is
+For flow matching, the Flow IPA preference objective is
 
-$$
+```math
 \begin{aligned}
 \mathcal{L}_{\mathrm{Flow-IPA}}
 = \mathbb{E}_{t \sim \mathcal{U}(0,1),\,v}
 \Bigg[
--\log \sigma\!\Bigg(
+-\log \sigma\Bigg(
 \frac{\beta}{2}(1-t)^2
 \Big(&
 \left\|v-v_{\mathrm{ref}}(\mathbf{Z}_t;t,I,P)\right\|_2^2 \\
@@ -90,7 +87,7 @@ $$
 \Bigg)
 \Bigg].
 \end{aligned}
-$$
+```
 
 Here, $I$ is the reference image and $P$ is the pose sequence.
 
